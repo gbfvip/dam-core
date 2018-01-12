@@ -13,6 +13,25 @@ public class Reference<T> implements FactoryBean {
     //todo need init proxy of "ref" instance
     private T proxy;
 
+    private String id;
+    private String ref;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getRef() {
+        return ref;
+    }
+
+    public void setRef(String ref) {
+        this.ref = ref;
+    }
+
     private static final Logger logger = LoggerFactory.getLogger(Reference.class);
 
     @PostConstruct

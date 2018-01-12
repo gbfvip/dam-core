@@ -12,6 +12,27 @@
             <![CDATA[ Namespace support for dam services. ]]></xsd:documentation>
     </xsd:annotation>
 
+    <xsd:complexType name="reservoirType">
+        <xsd:attribute name="duration" type="xsd:long" use="optional" default="10">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[ The duration of dam keep closed(seconds). ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="size" type="xsd:long" use="optional" default="1000">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <![CDATA[ The max number of method call dam can hold for the same time. ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:element name="reservoir" type="reservoirType">
+        <xsd:annotation>
+            <xsd:documentation>
+                <![CDATA[ Reservoir config eg: <dam:reservoir duration=5 size=100/> ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
     <xsd:complexType name="referenceType">
         <xsd:attribute name="id" type="xsd:ID">
             <xsd:annotation>
@@ -23,22 +44,12 @@
                 <xsd:documentation><![CDATA[ The service need to set behind dam. ]]></xsd:documentation>
             </xsd:annotation>
         </xsd:attribute>
-        <xsd:attribute name="duration" type="xsd:long" use="optional" default="10">
-            <xsd:annotation>
-                <xsd:documentation><![CDATA[ The duration of dam keep closed(seconds). ]]></xsd:documentation>
-            </xsd:annotation>
-        </xsd:attribute>
-        <xsd:attribute name="size" type="xsd:long" use="optional" default="1000">
-            <xsd:annotation>
-                <xsd:documentation><![CDATA[ The max number of method call dam can hold for the same time. ]]></xsd:documentation>
-            </xsd:annotation>
-        </xsd:attribute>
     </xsd:complexType>
 
     <xsd:element name="reference" type="referenceType">
         <xsd:annotation>
             <xsd:documentation>
-                <![CDATA[ Reference service config eg: <loom:reference api="com.zhe800.order.xxx.Api" version="1.0"  timeout="30000" registry="zk01"/> ]]></xsd:documentation>
+                <![CDATA[ Reference config eg: <dam:reference id="xxx" ref="yyy"/> ]]></xsd:documentation>
         </xsd:annotation>
     </xsd:element>
 
