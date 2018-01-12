@@ -21,8 +21,6 @@ public class Reference implements FactoryBean {
 
     private String id;
 
-    private String ref;
-
     private Object underling;
 
     @Autowired
@@ -36,18 +34,16 @@ public class Reference implements FactoryBean {
         this.id = id;
     }
 
-    public String getRef() {
-        return ref;
+    public Object getUnderling() {
+        return underling;
     }
 
-    public void setRef(String ref) {
-        this.ref = ref;
+    public void setUnderling(Object underling) {
+        this.underling = underling;
     }
 
     @PostConstruct
     private void init() {
-        //todo during spring initial step,there is no ApplicationContext yet?
-        underling = SpringContextHolder.getBean(ref);
         Proxy.newProxyInstance(underling.getClass().getClassLoader(), underling.getClass().getInterfaces(), (proxy, method, args) -> {
             ArgsWrapper argsWrapper = new ArgsWrapper(args);
             String key = DigestUtils.md5DigestAsHex((method.toString() + argsWrapper.toString()).getBytes());
