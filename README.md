@@ -1,0 +1,1 @@
+intend to intercept multiple identical method call happens in a very short time,based on spring project
