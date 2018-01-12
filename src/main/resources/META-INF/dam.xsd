@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://gbfvip.lab/schema/dam"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://gbfvip.lab/schema/dam">
+
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.springframework.org/schema/beans"/>
+    <xsd:import namespace="http://www.springframework.org/schema/tool"/>
+
+    <xsd:annotation>
+        <xsd:documentation>
+            <![CDATA[ Namespace support for dam services. ]]></xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:complexType name="referenceType">
+        <xsd:attribute name="id" type="xsd:ID">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[ The unique identifier for a bean. ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ref" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[ The service need to set behind dam. ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="duration" type="xsd:long" use="optional" default="10">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[ The duration of dam keep closed(seconds). ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="size" type="xsd:long" use="optional" default="1000">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[ The max number of method call dam can hold for the same time. ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:element name="reference" type="referenceType">
+        <xsd:annotation>
+            <xsd:documentation>
+                <![CDATA[ Reference service config eg: <loom:reference api="com.zhe800.order.xxx.Api" version="1.0"  timeout="30000" registry="zk01"/> ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+</xsd:schema>
