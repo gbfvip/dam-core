@@ -11,8 +11,6 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.DigestUtils;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 
@@ -67,7 +65,7 @@ public class Reference implements FactoryBean, InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         underling = Class.forName(this.clazz).newInstance();
-        proxy = Proxy.newProxyInstance(underling.getClass().getClassLoader(), underling.getClass().getInterfaces(), (proxy1, method, args) -> {
+        proxy = Proxy.newProxyInstance(underling.getClass().getClassLoader(), underling.getClass().getInterfaces(), (proxy, method, args) -> {
             Object result = null;
             Restriction annotation = method.getAnnotation(Restriction.class);
             if (annotation == null) {
@@ -77,7 +75,7 @@ public class Reference implements FactoryBean, InitializingBean {
                 String key = DigestUtils.md5DigestAsHex((method.toString() + argsWrapper.toString()).getBytes());
                 try {
                     result = cache.get(key, () -> {
-                        Object cacheResult = method.invoke(proxy1, args);
+                        Object cacheResult = method.invoke(underling, args);
                         if (cacheResult == null) {
                             throw new NullValueException();
                         }
