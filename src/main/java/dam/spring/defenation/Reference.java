@@ -1,10 +1,10 @@
 package dam.spring.defenation;
 
 
+import dam.annotation.Restriction;
 import dam.cache.ArgsWrapper;
 import dam.cache.MethodResultCache;
 import dam.exception.NullValueException;
-import dam.spring.SpringContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
@@ -42,21 +42,28 @@ public class Reference implements FactoryBean {
         this.underling = underling;
     }
 
+    public void setCache(MethodResultCache cache) {
+        this.cache = cache;
+    }
+
     @PostConstruct
     private void init() {
         Proxy.newProxyInstance(underling.getClass().getClassLoader(), underling.getClass().getInterfaces(), (proxy, method, args) -> {
-            ArgsWrapper argsWrapper = new ArgsWrapper(args);
-            String key = DigestUtils.md5DigestAsHex((method.toString() + argsWrapper.toString()).getBytes());
             Object result = null;
-            try {
-                result = cache.get(key, () -> {
-                    Object result1 = method.invoke(proxy, args);
-                    if (result1 == null) {
-                        throw new NullValueException();
-                    }
-                    return result1;
-                });
-            } catch (NullValueException ignored) {
+            Restriction annotation = method.getAnnotation(Restriction.class);
+            if (annotation != null) {
+                ArgsWrapper argsWrapper = new ArgsWrapper(args);
+                String key = DigestUtils.md5DigestAsHex((method.toString() + argsWrapper.toString()).getBytes());
+                try {
+                    result = cache.get(key, () -> {
+                        Object cacheResult = method.invoke(proxy, args);
+                        if (cacheResult == null) {
+                            throw new NullValueException();
+                        }
+                        return cacheResult;
+                    });
+                } catch (NullValueException ignored) {
+                }
             }
             return result;
         });

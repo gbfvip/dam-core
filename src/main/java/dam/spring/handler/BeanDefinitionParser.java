@@ -36,8 +36,6 @@ public class BeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
             bean.addDependsOn(ref);
             bean.addPropertyValue("id", id);
             bean.addPropertyValue("underling", parserContext.extractSource(ref));
-            bean.addPropertyValue("duration", element.getAttribute("duration"));
-            bean.addPropertyValue("size", element.getAttribute("size"));
             bean.addPropertyValue("cache", new MethodResultCache(Long.valueOf(element.getAttribute("size")), Long.valueOf(element.getAttribute("duration"))));
             logger.debug("[dam:reference] id : [{}] finish init", id);
         }
