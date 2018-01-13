@@ -1,5 +1,7 @@
 package dam.test;
 
+import dam.annotation.Restriction;
+
 import java.util.UUID;
 
 public class TestBean implements TestInterface {
@@ -8,6 +10,7 @@ public class TestBean implements TestInterface {
     }
 
     @Override
+    @Restriction
     public String getRandomString() {
         return UUID.randomUUID().toString();
     }

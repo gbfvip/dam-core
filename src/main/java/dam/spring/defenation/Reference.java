@@ -11,6 +11,7 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.DigestUtils;
 
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 
@@ -67,7 +68,8 @@ public class Reference implements FactoryBean, InitializingBean {
         underling = Class.forName(this.clazz).newInstance();
         proxy = Proxy.newProxyInstance(underling.getClass().getClassLoader(), underling.getClass().getInterfaces(), (proxy, method, args) -> {
             Object result = null;
-            Restriction annotation = method.getAnnotation(Restriction.class);
+            Method underlingMethod = underling.getClass().getMethod(method.getName());
+            Restriction annotation = underlingMethod.getAnnotation(Restriction.class);
             if (annotation == null) {
                 result = method.invoke(underling, args);
             } else {
