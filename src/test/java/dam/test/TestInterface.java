@@ -1,7 +1,5 @@
 package dam.test;
 
-import dam.annotation.Restriction;
-
 public interface TestInterface {
 
     public String getRandomString();
