@@ -10,11 +10,11 @@ public class Test {
         ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
                 "classpath:spring/*.xml"
         });
-        System.out.println(context.getBean("testBean1", TestInterface.class).getRandomString());
-        System.out.println(context.getBean("testBean1", TestInterface.class).getRandomString());
-        System.out.println(context.getBean("testBean1", TestInterface.class).getRandomStringRT());
-        System.out.println(context.getBean("testBean1", TestInterface.class).getRandomStringRT());
+        System.out.println(context.getBean("testBean", TestInterface.class).getRandomString());
+        System.out.println(context.getBean("testBean", TestInterface.class).getRandomString());
+        System.out.println(context.getBean("testBean", TestInterface.class).getRandomStringRT());
+        System.out.println(context.getBean("testBean", TestInterface.class).getRandomStringRT());
         Thread.sleep(TimeUnit.SECONDS.toMillis(11));
-        System.out.println(context.getBean("testBean1", TestInterface.class).getRandomString());
+        System.out.println(context.getBean("testBean", TestInterface.class).getRandomString());
     }
 }

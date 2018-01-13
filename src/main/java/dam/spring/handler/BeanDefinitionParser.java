@@ -2,7 +2,7 @@ package dam.spring.handler;
 
 
 import dam.cache.MethodResultCache;
-import dam.spring.defenation.Reference;
+import dam.spring.defenation.Gate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -32,7 +32,7 @@ public class BeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
         String id = element.getAttribute("id");
         String clazz = element.getAttribute("class");
         logger.debug("[dam:reference] id : [{}] start init", id);
-        if (Reference.class.equals(beanClass)) {
+        if (Gate.class.equals(beanClass)) {
             bean.addPropertyValue("id", id);
             bean.addPropertyValue("clazz", clazz);
             bean.addPropertyValue("cache", new MethodResultCache(Long.valueOf(element.getAttribute("size")), Long.valueOf(element.getAttribute("duration"))));

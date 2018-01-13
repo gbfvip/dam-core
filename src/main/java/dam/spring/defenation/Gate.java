@@ -15,9 +15,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 
-public class Reference implements FactoryBean, InitializingBean {
+public class Gate implements FactoryBean, InitializingBean {
 
-    private static final Logger logger = LoggerFactory.getLogger(Reference.class);
+    private static final Logger logger = LoggerFactory.getLogger(Gate.class);
 
     private String id;
 
