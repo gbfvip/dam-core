@@ -30,12 +30,11 @@ public class BeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder bean) {
         bean.setLazyInit(false);
         String id = element.getAttribute("id");
-        String ref = element.getAttribute("ref");
+        String clazz = element.getAttribute("class");
         logger.debug("[dam:reference] id : [{}] start init", id);
         if (Reference.class.equals(beanClass)) {
-            bean.addDependsOn(ref);
             bean.addPropertyValue("id", id);
-            bean.addPropertyValue("underling", parserContext.extractSource(ref));
+            bean.addPropertyValue("clazz", clazz);
             bean.addPropertyValue("cache", new MethodResultCache(Long.valueOf(element.getAttribute("size")), Long.valueOf(element.getAttribute("duration"))));
             logger.debug("[dam:reference] id : [{}] finish init", id);
         }

@@ -12,7 +12,7 @@
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="class" type="xsd:string" use="required"/>
                     <xsd:attribute name="duration" type="xsd:long" use="optional" default="10"/>
                     <xsd:attribute name="size" type="xsd:long" use="optional" default="1000"/>
                 </xsd:extension>

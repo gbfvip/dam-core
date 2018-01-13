@@ -3,6 +3,5 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dam="http://gbfvip.lab/schema/dam"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://gbfvip.lab/schema/dam http://gbfvip.lab/schema/dam/dam.xsd">
 
-    <bean id="testBean" class="dam.test.TestBean"/>
-    <dam:reference ref="testBean" id="testBean1" duration="10" size="1000"/>
+    <dam:reference class="dam.test.TestBean" id="testBean1" duration="10" size="1000"/>
 </beans>
