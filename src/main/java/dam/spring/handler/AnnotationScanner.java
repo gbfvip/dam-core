@@ -1,7 +1,8 @@
 package dam.spring.handler;
 
-import dam.annotation.Gate;
+import dam.annotation.UnderDamControl;
 import dam.cache.MethodResultCache;
+import dam.spring.defenation.Gate;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -21,7 +22,7 @@ public class AnnotationScanner extends ClassPathBeanDefinitionScanner {
 
     @Override
     protected void registerDefaultFilters() {
-        addIncludeFilter(new AnnotationTypeFilter(Gate.class));
+        addIncludeFilter(new AnnotationTypeFilter(UnderDamControl.class));
         super.registerDefaultFilters();
     }
 
@@ -31,7 +32,7 @@ public class AnnotationScanner extends ClassPathBeanDefinitionScanner {
         for (BeanDefinitionHolder holder : beanDefinitions) {
             GenericBeanDefinition definition = (GenericBeanDefinition) holder.getBeanDefinition();
             definition.getPropertyValues().add("clazz", definition.getBeanClassName());
-            Map<String, Object> attributes = ((ScannedGenericBeanDefinition) definition).getMetadata().getAnnotationAttributes(Gate.class.getName(), false);
+            Map<String, Object> attributes = ((ScannedGenericBeanDefinition) definition).getMetadata().getAnnotationAttributes(UnderDamControl.class.getName(), false);
             if (attributes.containsKey("id")) {
                 definition.getPropertyValues().add("id", attributes.get("id"));
             }
@@ -45,13 +46,13 @@ public class AnnotationScanner extends ClassPathBeanDefinitionScanner {
             }
 
             definition.getPropertyValues().add("cache", new MethodResultCache(size, duration));
-            definition.setBeanClass(dam.spring.defenation.Gate.class);
+            definition.setBeanClass(Gate.class);
         }
         return beanDefinitions;
     }
 
     @Override
     protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
-        return super.isCandidateComponent(beanDefinition) && beanDefinition.getMetadata().hasAnnotation(Gate.class.getName());
+        return super.isCandidateComponent(beanDefinition) && beanDefinition.getMetadata().hasAnnotation(UnderDamControl.class.getName());
     }
 }
