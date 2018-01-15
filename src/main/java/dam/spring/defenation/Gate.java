@@ -19,8 +19,6 @@ public class Gate implements FactoryBean, InitializingBean {
 
     private static final Logger logger = LoggerFactory.getLogger(Gate.class);
 
-    private String id;
-
     private String clazz;
 
     private Object underling;
@@ -28,14 +26,6 @@ public class Gate implements FactoryBean, InitializingBean {
     private Object proxy;
 
     private MethodResultCache cache;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public void setCache(MethodResultCache cache) {
         this.cache = cache;

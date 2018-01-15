@@ -5,6 +5,7 @@ import dam.cache.MethodResultCache;
 import dam.spring.defenation.Gate;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.support.AutowireCandidateQualifier;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
@@ -33,9 +34,6 @@ public class AnnotationScanner extends ClassPathBeanDefinitionScanner {
             GenericBeanDefinition definition = (GenericBeanDefinition) holder.getBeanDefinition();
             definition.getPropertyValues().add("clazz", definition.getBeanClassName());
             Map<String, Object> attributes = ((ScannedGenericBeanDefinition) definition).getMetadata().getAnnotationAttributes(UnderDamControl.class.getName(), false);
-            if (attributes.containsKey("id")) {
-                definition.getPropertyValues().add("id", attributes.get("id"));
-            }
             long size = 1000;
             long duration = 10;
             if (attributes.containsKey("size")) {
