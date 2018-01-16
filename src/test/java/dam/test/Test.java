@@ -10,6 +10,7 @@ public class Test {
         ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
                 "classpath:spring/*.xml"
         });
+
         System.out.println(context.getBean("test", TestInterface.class).getRandomString());
         System.out.println(context.getBean("test", TestInterface.class).getRandomString());
         System.out.println(context.getBean("test", TestInterface.class).getRandomStringRT());

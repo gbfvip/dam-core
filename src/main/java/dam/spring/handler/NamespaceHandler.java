@@ -10,6 +10,6 @@ public class NamespaceHandler extends NamespaceHandlerSupport {
     @Override
     public void init() {
         registerBeanDefinitionParser("gate", new BeanDefinitionParser(Gate.class));
-        registerBeanDefinitionParser("install", new BeanDefinitionParser(Install.class));
+        registerBeanDefinitionParser("install", new InstallBeanDefinitionParser(Install.class));
     }
 }

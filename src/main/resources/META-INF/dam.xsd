@@ -22,10 +22,9 @@
 
     <xsd:element name="install">
         <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="beans:identifiedType">
-                </xsd:extension>
-            </xsd:complexContent>
+            <xsd:attribute name="base-package" type="xsd:string"
+                           use="required">
+            </xsd:attribute>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
