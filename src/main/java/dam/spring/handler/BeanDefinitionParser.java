@@ -33,7 +33,6 @@ public class BeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
         String clazz = element.getAttribute("class");
         logger.debug("[dam:reference] id : [{}] start init", id);
         if (Gate.class.equals(beanClass)) {
-            bean.addPropertyValue("id", id);
             bean.addPropertyValue("clazz", clazz);
             bean.addPropertyValue("cache", new MethodResultCache(Long.valueOf(element.getAttribute("size")), Long.valueOf(element.getAttribute("duration"))));
             logger.debug("[dam:reference] id : [{}] finish init", id);
